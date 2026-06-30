@@ -1,0 +1,21 @@
+version: 0.0
+os: linux
+
+files:
+  - source: /
+    destination: /home/ubuntu/three-tier-nodejs
+
+hooks:
+  BeforeInstall:
+    - location: scripts/install_docker.sh
+      timeout: 300
+      runas: root
+
+  AfterInstall:
+    - location: scripts/deploy_backend.sh
+      timeout: 300
+      runas: root
+
+    - location: scripts/deploy_frontend.sh
+      timeout: 300
+      runas: root
